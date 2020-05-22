@@ -151,9 +151,12 @@ include ("load.php");
 			return $parameters;
 		}
 		
-		public function route(){
+		public function route() {
 
-			if (($sp = $this->getContract()) != -1)
+			$sp = $this->getContract();
+			if ($sp['allowed'] == 0)
+				return false;
+			if ($sp != -1)
 			{
 				$field = []; 
 				$protocol = getservbyport($sp['port'],'tcp');
