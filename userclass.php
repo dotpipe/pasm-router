@@ -2,12 +2,6 @@
 
 include_once ("load.php");
 
-// MVC for routing
-use mvc\Models;
-use mvc\Errors;
-use mvc\Views;
-use mvc\Controllers;
-
 class UserClass {
 
     /*

@@ -151,12 +151,9 @@ include ("load.php");
 			return $parameters;
 		}
 		
-		public function route() {
+		public function route(){
 
-			$sp = $this->getContract();
-			if ($sp['allowed'] == 0)
-				return false;
-			if ($sp != -1)
+			if (($sp = $this->getContract()) != -1)
 			{
 				$field = []; 
 				$protocol = getservbyport($sp['port'],'tcp');
@@ -234,6 +231,9 @@ include ("load.php");
 				$filename = $_COOKIE['PHPSESSID'];
 			if (count($this->pasm->stack) == 0 && file_exists($_COOKIE['PHPSESSID']))
 				$this->pasm->recvr_stack($filename);
+
+			//$this->pasm->stack;
+			//$this->pasm->stack = $vartemp;
 			$this->pasm->load_str($filename)
 				->save_stack_file()
 				->end();
