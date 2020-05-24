@@ -10,6 +10,7 @@ include ("load.php");
 		public $reqh;
 		public $pasm;
 		public $uri;
+
 		/*
 		*
 		* public function __construct
@@ -23,11 +24,8 @@ include ("load.php");
 			if ($GET != null) {
 				if ($GET === 'GET')
 					$this->QURY = $_GET;
-				else if ($GET != null)
+				else if ($GET === 'POST')
 					$this->QURY = $_POST;
-				else {
-					var_dump($this->req_headers);//http_parse_query();
-				}
 				if (!isset($this->QURY) || $this->QURY['port'] == null)
 					$this->QURY['port'] = 80;
 				if (!isset($this->QURY) || $this->QURY['user'] == null)
@@ -59,10 +57,44 @@ include ("load.php");
 			else {
 
 				$this->pasm->addr([
-					"recv" => $this->QURY['recv'],
 					"from" => $this->QURY['from'],
 					"allowed" => 1,
-					"redirect" => [$this->reqh['Referer'], $this->QURY['target']], 
+					"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+					"port" => $this->QURY['port'],
+					"user" => $this->QURY['user']
+					])
+					->movr()
+					->end();
+			}
+			
+			return $this;
+		}
+		
+		/*
+		*
+		* public function addContract
+		* @parameters recv, from, target, port, user
+		*
+		*/
+		public function addUserToContract() {
+			if ($this->group_id > 0)
+				return false;
+			if (count($this->pasm->stack) == 0 && file_exists($_COOKIE['PHPSESSID']))
+				$this->load($_COOKIE['PHPSESSID']);
+			
+			$sp = $this->getContract();
+			
+			if ($sp != -1) {
+				$p = array_search($sp, $this->pasm->stack);
+				$sp['allowed'] = 1;
+				$this->pasm->stack[$p] = $sp;
+			}
+			else {
+
+				$this->pasm->addr([
+					"from" => $this->QURY['from'],
+					"allowed" => 1,
+					"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
 					"port" => $this->QURY['port'],
 					"user" => $this->QURY['user']
 					])
@@ -91,11 +123,40 @@ include ("load.php");
 			}
 			else {
 				$this->pasm->addr([
-					"recv" => $this->QURY['recv'],
-					"from" => $this->QURY['from'], 
-					"allowed" => 0,
-					"redirect" => [$this->reqh['Referer'], $this->QURY['target']], 
-					"port" => $this->QURY['port'], 
+					"from" => $this->QURY['from'],
+					"allowed" => 1,
+					"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+					"port" => $this->QURY['port'],
+					"user" => $this->QURY['user']
+					])
+					->movr()
+					->end();
+			}
+			return $this;
+		}
+		
+		/*
+		*
+		* public function remContract
+		* @parameters none
+		*
+		*/
+		public function remUserFromContract() {
+			if ($this->group_id > 0)
+				return false;
+			
+			$sp = $this->getContract();
+			if ($sp != -1) {
+				$p = array_search($sp, $this->pasm->stack);
+				$sp['allowed'] = 0;
+				$this->pasm->stack[$p] = $sp;
+			}
+			else {
+				$this->pasm->addr([
+					"from" => $this->QURY['from'],
+					"allowed" => 1,
+					"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+					"port" => $this->QURY['port'],
 					"user" => $this->QURY['user']
 					])
 					->movr()
@@ -112,12 +173,18 @@ include ("load.php");
 		*/
 		public function getContract() {
 			$test = [
+				/*
 				"recv" => $this->QURY['recv'], 
 				"from" => $this->QURY['from'], 
 				"allowed" => 1, 
-				"redirect" => [$this->reqh['Referer'], $this->QURY['target']], 
+				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['target']], 
 				"port" => $this->QURY['port'], 
 				"user" => $this->QURY['user']
+				*/"from" => $this->QURY['from'],
+					"allowed" => 1,
+					"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+					"port" => $this->QURY['port'],
+					"user" => $this->QURY['user']
 			];
 			$cnt = 0;
 			foreach ($this->pasm->stack as $key) {
@@ -162,16 +229,17 @@ include ("load.php");
 
 			if (($sp = $this->getContract()) != -1)
 			{
-				if ($sp['allowed'] == 0)
-					header("Location: index.php");
+				if ($sp['allowed'] == 0) {
+					header("Location: hinderance.php");
+					
+				}
 				$field = []; 
 				$protocol = getservbyport($sp['port'],'tcp');
 				$aim = $sp['redirect'][1];
-				$domain = $sp['recv'];
-				
+				$config = json_decode(file_get_contents("config.json"));
 				# Create a connection
-				$url = "{$protocol}://{$domain}/{$aim}";
-				if ($_SERVER['REQUEST_METHOD'] != "POST") {
+				$url = "{$protocol}://{$config->domain}/{$aim}";
+				if ($_SERVER['REQUEST_METHOD'] == "POST") {
 					$handle = curl_init(); 
 					$this->reqHeaders();  
 					$user_agent=$_SERVER['HTTP_USER_AGENT'];
@@ -200,9 +268,8 @@ include ("load.php");
 			}
 			else {
 				$this->reqHeaders();
-				$q = $this->reqh['Referer'];
-				echo var_dump($this->reqh);
-				
+				$q = basename($_SERVER['PHP_SELF']);
+				header("Location: {$q}");
 			}
 		}
 	
