@@ -57,10 +57,11 @@ include ("load.php");
 			else {
 
 				$this->pasm->addr([
-					"from" => $this->QURY['from'],
-					"allowed" => 1,
-					"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
-					"port" => $this->QURY['port'],
+					"recv" => $this->QURY['recv'], 
+					"from" => $this->QURY['from'], 
+					"allowed" => 1, 
+					"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['target']], 
+					"port" => $this->QURY['port'], 
 					"user" => $this->QURY['user']
 					])
 					->movr()
@@ -123,10 +124,11 @@ include ("load.php");
 			}
 			else {
 				$this->pasm->addr([
-					"from" => $this->QURY['from'],
-					"allowed" => 1,
-					"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
-					"port" => $this->QURY['port'],
+					"recv" => $this->QURY['recv'], 
+					"from" => $this->QURY['from'], 
+					"allowed" => 1, 
+					"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['target']], 
+					"port" => $this->QURY['port'], 
 					"user" => $this->QURY['user']
 					])
 					->movr()
@@ -172,29 +174,29 @@ include ("load.php");
 		*
 		*/
 		public function getContract() {
-			$test = [
-				/*
+			$user = [
+				"from" => $this->QURY['from'],
+				"allowed" => 1,
+				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+				"port" => $this->QURY['port'],
+				"user" => $this->QURY['user']
+			];
+			$redirect = [
 				"recv" => $this->QURY['recv'], 
 				"from" => $this->QURY['from'], 
 				"allowed" => 1, 
 				"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['target']], 
 				"port" => $this->QURY['port'], 
 				"user" => $this->QURY['user']
-				*/"from" => $this->QURY['from'],
-					"allowed" => 1,
-					"redirect" => [basename($_SERVER['PHP_SELF']), $this->QURY['recv'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
-					"port" => $this->QURY['port'],
-					"user" => $this->QURY['user']
+				
 			];
-			$cnt = 0;
 			foreach ($this->pasm->stack as $key) {
-				$cnt = 0;
-				if (($test) == ($key))
+				if (($redirect) == ($key) || ($user) == ($key))
 				{
 					return $test;
 				}
 				$test['allowed'] = 0;
-				if (($test) == ($key))
+				if (($redirect) == ($key) || ($user) == ($key))
 				{
 					return $test;
 				}
@@ -230,7 +232,7 @@ include ("load.php");
 			if (($sp = $this->getContract()) != -1)
 			{
 				if ($sp['allowed'] == 0) {
-					header("Location: hinderance.php");
+					header("Location: error404.php");
 					
 				}
 				$field = []; 
