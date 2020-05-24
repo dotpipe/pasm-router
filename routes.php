@@ -25,6 +25,13 @@ include ("load.php");
 					$this->QURY = $_GET;
 				else if ($GET != null)
 					$this->QURY = $_POST;
+				else {
+					var_dump($this->req_headers);//http_parse_query();
+				}
+				if (!isset($this->QURY) || $this->QURY['port'] == null)
+					$this->QURY['port'] = 80;
+				if (!isset($this->QURY) || $this->QURY['user'] == null)
+					$this->QURY['user'] = "guest";
 			}
 			$this->reqHeaders();
 			$this->resHeaders();
@@ -33,7 +40,7 @@ include ("load.php");
 		/*
 		*
 		* public function addContract
-		* @query string recv, from, target
+		* @parameters recv, from, target, port, user
 		*
 		*/
 		public function addContract() {
@@ -132,10 +139,10 @@ include ("load.php");
 		/*
 		*
 		* public function getContract
-		* @parameters none
+		* @parameters string
 		*
 		*/
-		public function http_parse_query($query) {
+		public function http_parse_query(string $query) {
 			$parameters = array();
 			$query = explode('?', $query);
 			$queryParts = explode('&', $query[1]);
@@ -155,6 +162,8 @@ include ("load.php");
 
 			if (($sp = $this->getContract()) != -1)
 			{
+				if ($sp['allowed'] == 0)
+					header("Location: index.php");
 				$field = []; 
 				$protocol = getservbyport($sp['port'],'tcp');
 				$aim = $sp['redirect'][1];
@@ -162,7 +171,7 @@ include ("load.php");
 				
 				# Create a connection
 				$url = "{$protocol}://{$domain}/{$aim}";
-				if ($_SERVER['REQUEST_METHOD'] == "POST") {
+				if ($_SERVER['REQUEST_METHOD'] != "POST") {
 					$handle = curl_init(); 
 					$this->reqHeaders();  
 					$user_agent=$_SERVER['HTTP_USER_AGENT'];
@@ -179,7 +188,6 @@ include ("load.php");
 					//curl_setopt($handle, CURLOPT_USERAGENT, $user_agent);
 					$page_contents = curl_exec($handle);
 					echo $page_contents;
-					return $handle;
 				}
 				else {
 					$data = "";
@@ -192,8 +200,9 @@ include ("load.php");
 			}
 			else {
 				$this->reqHeaders();
-				$q = $this->reqh['referer'];
-				header("Location: {$q}");
+				$q = $this->reqh['Referer'];
+				echo var_dump($this->reqh);
+				
 			}
 		}
 	
@@ -222,7 +231,7 @@ include ("load.php");
 		/*
 		*
 		* public function save
-		* @parameters none
+		* @parameters string
 		*
 		*/
 		public function save(string $filename = "") {
@@ -243,7 +252,7 @@ include ("load.php");
 		/*
 		*
 		* public function load
-		* @parameters none
+		* @parameters string
 		*
 		*/
 		public function load(string $filename= "") {
