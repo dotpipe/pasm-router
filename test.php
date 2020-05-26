@@ -36,14 +36,11 @@
         @$route->remContract();
         @$route->route();
     }
-    else if (count($route->QURY) >= 4)
+    else
     {
         if (!isset(($_SERVER['PHP_SELF'])))
             $_SERVER['PHP_SELF'] = "index.php";
         @$route->route();
-    }
-    else if (count($route->QURY) < 5) {
-        echo "Not Enough Arguments\rRecv, From, Target, Port, User";
     }
     $route->pasm->load_str($_COOKIE['PHPSESSID']); 
     $route->save($_COOKIE['PHPSESSID']);

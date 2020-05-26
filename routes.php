@@ -33,6 +33,7 @@ include ("load.php");
 			}
 			$this->reqHeaders();
 			$this->resHeaders();
+
 		}
 		
 		/*
@@ -193,14 +194,16 @@ include ("load.php");
 			foreach ($this->pasm->stack as $key) {
 				if (($redirect) == ($key) || ($user) == ($key))
 				{
-					return $test;
+					return $redirect == $key ? $redirect : $user;
 				}
-				$test['allowed'] = 0;
+				$redirect['allowed'] = 0;
+				$user['allowed'] = 0;
 				if (($redirect) == ($key) || ($user) == ($key))
 				{
-					return $test;
+					return $redirect == $key ? $redirect : $user;
 				}
-				$test['allowed'] = 1;
+				$redirect['allowed'] = 1;
+				$user['allowed'] = 1;
 			}
 			return -1;
 		}
@@ -228,7 +231,7 @@ include ("load.php");
 		}
 		
 		public function route(){
-
+			$config = json_decode(file_get_contents("config.json"));
 			if (($sp = $this->getContract()) != -1)
 			{
 				if ($sp['allowed'] == 0) {
@@ -265,13 +268,13 @@ include ("load.php");
 						$data .= "&{$key}={$value}";
 					}
 					$data = substr($data,1);
-					header("Location: {$url}?{$data}");
+					header("Location: {$aim}?{$data}");
 				}
 			}
 			else {
 				$this->reqHeaders();
 				$q = basename($_SERVER['PHP_SELF']);
-				header("Location: {$q}");
+				header("Location: error.php");
 			}
 		}
 	

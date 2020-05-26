@@ -1,7 +1,7 @@
 
 
 /*
-    <form id="thrown" method="get" action="test.php">
+    <form id="thrown" method="post" action="test.php">
         <input type="hidden" name="recv" value="pasm-router">
         <input type="hidden" name="from" value="localhost">
         <input type="hidden" name="target" value="final.php">
