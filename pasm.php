@@ -1,5 +1,7 @@
 <?php
 
+namespace Adoms\pasm;
+
 class PASM 
 {
 
@@ -90,8 +92,12 @@ class PASM
     // amount of documentation.
     public function char_adjust_addition()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);  // Here we collect the current function name (all functions contain 1/2)
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);    // And if there are args we are putting them in $this->args
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
+        
         $this->rdx = chr(($this->ecx + $this->ah)%256);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -102,8 +108,11 @@ class PASM
 
     public function carry_add()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->cl = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -113,8 +122,11 @@ class PASM
 
     public function add()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->rdx = $this->ecx + $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -124,8 +136,11 @@ class PASM
 
     public function and()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->cl = $this->ecx & $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -135,8 +150,11 @@ class PASM
 
     public function chmod()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         chmod($this->string, $this->ah);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -146,8 +164,11 @@ class PASM
 
     public function bit_scan_fwd()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->tp == null) {
             $this->tp = $this->qword;   // qword is used to look through a string via bit scanning
             $this->tp = decbin($this->tp);
@@ -164,8 +185,11 @@ class PASM
 
     public function bit_scan_rvr()                  // reverse of above
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->tp == null) {
             $this->tp = $this->qword;
             $this->tp = decbin($this->tp);
@@ -182,8 +206,11 @@ class PASM
 
     public function byte_rvr()                  // reverse byte
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $temp = decbin($this->ecx);
         $this->rdx = strrev($temp);
         $this->rdx = bindec($this->rdx);
@@ -195,15 +222,21 @@ class PASM
 
     public function bit_test()                  // bit is filled in pointer
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         return $this->tp[$this->ah];
     }
 
     public function bit_test_comp()         // look thru byte and see the $ah'th bit
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $bo = decbin($this->ecx);
         $bo = $bo[$this->ah];
         $this->CF = (bool)($bo);
@@ -215,8 +248,11 @@ class PASM
 
     public function bit_test_reset()    // Clear bit test flag
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $bo = decbin($this->ecx);
         $bo = $bo[$this->ah];
         $this->CF = (bool)($bo);
@@ -229,8 +265,11 @@ class PASM
 
     public function bit_test_set()                  // Test bit
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $bo = decbin($this->ecx);
         $bo = $bo[$this->ah];
         $this->CF = (bool)($bo);
@@ -243,16 +282,22 @@ class PASM
 
     public function call()                  // call any function
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (is_callable($this->ST0))
             return call_user_func($this->ST0(), $this->string, $this->ah);
     }
 
     public function cmp_mov_a()         // heck ah against top of stack
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = ($this->ah > $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -262,8 +307,11 @@ class PASM
 
     public function cmp_mov_ae()    // same (documenting will continue below)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = ($this->ah >= $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -273,8 +321,11 @@ class PASM
 
     public function cmp_mov_b()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = ($this->ah < $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -284,8 +335,11 @@ class PASM
 
     public function cmp_mov_be()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = ($this->ah <= $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -295,8 +349,11 @@ class PASM
 
     public function cmp_mov_e()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = ($this->ah == $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -306,8 +363,11 @@ class PASM
 
     public function cmp_mov_nz()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = ($this->CF == 1 & $this->ah == $this->ST0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -317,8 +377,11 @@ class PASM
 
     public function cmp_mov_pe()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = ($this->CF == 0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -328,8 +391,11 @@ class PASM
 
     public function cmp_mov_po()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = ($this->CF == 1) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -339,8 +405,11 @@ class PASM
 
     public function cmp_mov_s()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = ($this->ah < 0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -350,8 +419,11 @@ class PASM
 
     public function cmp_mov_z()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = ($this->ah > 0) ? $this->ah : $this->ecx;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -361,8 +433,11 @@ class PASM
 
     public function mov()   // move ah to ecx. Same as mov_ah()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -372,8 +447,11 @@ class PASM
 
     public function movabs()    // copy $ecx to stack
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         array_push($this->stack, array("movabs" => $this->ecx));
         $this->ST0 = $this->stack[array_key_last($this->stack)];
         if ($this->pdb == 1)
@@ -384,8 +462,11 @@ class PASM
 
     public function clear_carry()   // clear $CF
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->CF = 0;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -395,8 +476,11 @@ class PASM
 
     public function clear_registers()   // make all registers 0
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->CF = $this->adx = $this->bdx = $this->cdx = $this->ddx = $this->edx = $this->rdx = 0;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -406,8 +490,11 @@ class PASM
 
     public function comp_carry()    // negate $CF
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->CF = !($this->CF);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -417,8 +504,11 @@ class PASM
 
     public function cmp_e()         // bool of equality comparison (documentation continues below)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->cl = $this->ecx == $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -428,8 +518,11 @@ class PASM
 
     public function cmp_same()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->cl = $this->ecx == $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -439,8 +532,11 @@ class PASM
 
     public function cmp_xchg()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ecx == $this->ah) {
             $this->rdx = $this->ah;
             $this->ZF = 1;
@@ -455,8 +551,11 @@ class PASM
 
     public function decr()                  // decrement ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx--;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -466,8 +565,11 @@ class PASM
 
     public function divide()    // $ecx/$ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (is_numeric($this->ecx) && is_numeric($this->ah))
         $this->rdx = round($this->ecx/$this->ah);
         if ($this->pdb == 1)
@@ -478,8 +580,11 @@ class PASM
 
     public function absf()                  // absolute value of $ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->rdx = abs($this->ah);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -489,8 +594,11 @@ class PASM
 
     public function addf()                  // add $ecx and $ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->rdx = $this->ecx + $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -525,8 +633,11 @@ class PASM
 
     public function neg()   // negate $ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (is_numeric($this->ah))
             $this->rdx = $this->ah * (-1);
             if ($this->pdb == 1)
@@ -537,8 +648,11 @@ class PASM
 
     public function stack_cmov_b()                  // move on comparison (begins again below)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -553,8 +667,11 @@ class PASM
 
     public function stack_cmov_be()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -566,8 +683,11 @@ class PASM
 
     public function stack_cmov_e()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -579,8 +699,11 @@ class PASM
 
     public function stack_cmov_nb()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -592,8 +715,11 @@ class PASM
 
     public function stack_cmov_nbe()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -605,8 +731,11 @@ class PASM
 
     public function stack_cmov_ne()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (count($this->stack) > 0)
             $this->ST0 = $this->stack[array_key_last($this->stack)];
         else
@@ -618,8 +747,11 @@ class PASM
 
     public function fcomp()         // subtract top of stack from $ah and pop
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);  
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args  
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = $this->ah - $this->stack[array_key_last($this->stack)];
@@ -636,8 +768,11 @@ class PASM
 
     public function cosine()    // change top of stack to cosine of top of stack
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ST0 = &$this->stack[array_key_last($this->stack)];
         $this->ST0 = ($this->ST0 != null) ? cos($this->ST0) : null;
         if ($this->pdb == 1)
@@ -648,8 +783,11 @@ class PASM
 
     public function stack_pnt_rev()         // go reverse the stack
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         prev($this->stack);
         $this->sp = current($this->stack);
         if ($this->pdb == 1)
@@ -660,8 +798,11 @@ class PASM
 
     public function fdiv()                  // divide ST0 into $ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah == 0) {
             echo "Denominator cannot be 0";
             $this->cl = 0;
@@ -678,8 +819,11 @@ class PASM
 
     public function fdiv_pop()                  // opposite as above and pop
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ST0 == 0) {
             echo "Denominator cannot be 0";
             $this->cl = 0;
@@ -696,8 +840,11 @@ class PASM
 
     public function fdiv_rev()                  // opposite of fdiv
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ST0 == 0) {
             echo "Denominator cannot be 0";
             $this->cl = 0;
@@ -712,8 +859,11 @@ class PASM
 
     public function fdiv_rev_pop()                  // same as above with po
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ST0 == 0) {
             echo "Denominator cannot be 0";
             $this->cl = 0;
@@ -730,8 +880,11 @@ class PASM
 
     public function add_stack()         // add top of stack to ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = $this->ecx + $this->ST0;
@@ -743,8 +896,11 @@ class PASM
 
     public function ficomp()    // compare and pop
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ST0 == $this->ah)
             $this->cl = 1;
         array_pop($this->stack);
@@ -767,8 +923,11 @@ class PASM
 
     public function stack_load() // stack with count on stack
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $key = "f" . count($this->stack);
         array_push($this->stack, array($key => $this->ecx));
         $this->ecx = null;
@@ -781,8 +940,11 @@ class PASM
     
     public function stack_mrg() // stack with count on stack
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $key = "f" . count($this->stack);
         array_merge($this->stack, $this->array);
         $this->ecx = null;
@@ -795,8 +957,11 @@ class PASM
     
     public function fmul()                  // multiplies ecx and ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = $this->ecx * $this->ah;
@@ -808,8 +973,11 @@ class PASM
 
     public function stack_pnt_fwd()         // moves stack pointer forward
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         next($this->stack);
         $this->sp = current($this->stack);
         if ($this->pdb == 1)
@@ -820,8 +988,11 @@ class PASM
 
     public function store_int()         // subtracts $ST0 - 2-to-the-$ah and puts answer in $rdx 
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (ctype_xdigit($this->stack[array_key_last($this->stack)]))
             $this->ST0 = hexdec($this->stack[array_key_last($this->stack)]);
         if (is_numeric($this->stack[array_key_last($this->stack)]))
@@ -846,8 +1017,11 @@ class PASM
 
     public function store_int_pop() // same as above, but with pop
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah) || !is_numeric($this->stack[array_key_last($this->stack)])) {
             echo "Invalid Operand in store_int_pop: \$ah = $this->ah & $ST0 = " . $this->stack[array_key_last($this->stack)];
             return;
@@ -877,8 +1051,11 @@ class PASM
 
     public function subtract_rev() // like subtract but backwards
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah) || !is_numeric($this->ecx) || !$this->stack[array_key_last($this->stack)])
             return;
         $this->rdx = $this->ecx - $this->ah;
@@ -890,8 +1067,11 @@ class PASM
 
     public function subtract()  // $ah - $ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah) || !is_numeric($this->ecx) || !$this->stack[array_key_last($this->stack)])
             return;
         $this->rdx = $this->ah - $this->ecx;
@@ -903,8 +1083,11 @@ class PASM
 
     public function fld1()  // pushes ecx+1 to stack
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ecx))
             return;
         array_push($this->stack, array("inc" => ($this->ecx + 1)));
@@ -916,8 +1099,11 @@ class PASM
 
     public function load_logl2() //
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         array_push($this->stack, array("logl2" => log(log(2))));
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -927,8 +1113,11 @@ class PASM
 
     public function load_logl2t()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         array_push($this->stack, array("logl2t" => log(2,10)));
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -938,8 +1127,11 @@ class PASM
 
     public function load_loglg2()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah))
         {
             echo "\$ah must be numeric for load_loglg2";
@@ -954,8 +1146,11 @@ class PASM
 
     public function load_ln2()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $e = M_E;
         array_push($this->stack, array("ln2" => log($e,2)));
         if ($this->pdb == 1)
@@ -966,8 +1161,11 @@ class PASM
 
     public function load_pi()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         array_push($this->stack, array("pi" => M_PI));
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -977,8 +1175,11 @@ class PASM
 
     public function float_test()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah))
         {
             echo "\$ah must be numeric for float_test";
@@ -993,8 +1194,11 @@ class PASM
 
     public function fmul_pop() // ah * ecx and pop
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return;
         $this->rdx = $this->ah * $this->ecx;
@@ -1008,8 +1212,11 @@ class PASM
 
     public function clean_exceptions()  // clear exception bit
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $thiz->ZF = 0;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1019,8 +1226,11 @@ class PASM
 
     public function clean_reg() // clear cl
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->cl = 0;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1030,8 +1240,11 @@ class PASM
 
     public function fnop()  // counts as function, does nothing but takes up space (like in assembly)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -1040,8 +1253,11 @@ class PASM
 
     public function fpatan()    // gets arctan of $ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
 
         $this->cl = atan($this->ah);
         if ($this->pdb == 1)
@@ -1052,8 +1268,11 @@ class PASM
 
     public function fptan() // gets tangent of ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->cl = tan($this->ah);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1063,8 +1282,11 @@ class PASM
 
     public function fprem() // look to documentation (Oracle Systems Manual)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->stack[count($this->stack)-2]) || !is_numeric($this->stack[array_key_last($this->stack)]))
             return $this;
         if (count($this->stack) > 1)
@@ -1079,8 +1301,11 @@ class PASM
 
     public function frndint()   // round top of stack into $rdx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ecx) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = round($this->stack[array_key_last($this->stack)], $this->RC);
@@ -1092,8 +1317,11 @@ class PASM
 
     public function frstor() // copy $ah to $rdx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1126,8 +1354,11 @@ class PASM
 
     public function fscale()    // round top 2 stack elements and push to rdx ans powers of 2
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $sp1 = round($this->stack[count($this->stack)-2]);
         $sp0 = $this->stack[array_key_last($this->stack)];
         if (!is_numeric($sp1) || !is_numeric($sp0))
@@ -1144,8 +1375,11 @@ class PASM
 
     public function fsqrt() // push to stack top value's sqrt
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->stack[array_key_last($this->stack)] = sqrt($this->stack[array_key_last($this->stack)]);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1155,8 +1389,11 @@ class PASM
 
     public function fst() // copy ST0 to another position ($ecx)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ST0 = $this->stack[array_key_last($this->stack)];
         $this->stack[$this->ecx] = $this->ST0;
         if ($this->pdb == 1)
@@ -1167,8 +1404,11 @@ class PASM
 
     public function fstcw() // push $ah to $rdx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->rdx = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -1178,8 +1418,11 @@ class PASM
 
     public function fstp()  // same as fst() but pops
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->stack[$this->ecx] = $this->stack[array_key_last($this->stack)];
         array_pop($this->stack);
         $this->ST0 = $this->stack[array_key_last($this->stack)];
@@ -1191,8 +1434,11 @@ class PASM
 
     public function subtract_pop()  // like it says ($ah - $ST0)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ST0 = $this->stack[array_key_last($this->stack)];
         if (!is_numeric($this->ah) || !is_numeric($this->stack[array_key_last($this->stack)]))
         {
@@ -1210,8 +1456,11 @@ class PASM
 
     public function subtract_rev_pop() // (same only reverse)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah) || !is_numeric($this->stack[array_key_last($this->stack)]))
         {
             echo "\$ST0 & \$ah must be numeric for subtract_rev_pop";
@@ -1228,8 +1477,11 @@ class PASM
 
     public function ftst()  // check that math works
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->rdx))
         {
             echo "\$rdx must be numeric for ftst";
@@ -1244,8 +1496,11 @@ class PASM
 
     public function fucom() // ecx == $sp and $rdx = $ST0
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ecx) || !$this->stack[array_key_last($this->stack)])
             return $this;
         if (!is_float($this->stack[$this->ecx]) || !is_float($this->ST0))
@@ -1264,8 +1519,11 @@ class PASM
 
     public function fucomp()    // above ith pop
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->fucom();
         array_pop($this->stack);
         $this->ST0 = $this->stack[array_key_last($this->stack)];
@@ -1277,8 +1535,11 @@ class PASM
 
     public function fucompp()   // above with another pop
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->fucom();
         array_pop($this->stack);
         array_pop($this->stack);
@@ -1291,8 +1552,11 @@ class PASM
 
     public function fxam()  // get decimal value, without integer
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah) || !$this->stack[array_key_last($this->stack)])
             return $this;
         $this->rdx = $this->ah - round($this->ah);
@@ -1304,8 +1568,11 @@ class PASM
 
     public function fxch()  // exchange values from one stack place to another (the top)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ST0 = &$this->stack[array_key_last($this->stack)];
         $temp = $this->stack[$this->ecx];
         $this->stack[$this->ecx] = $this->ST0;  // goes into $this->ecx
@@ -1318,8 +1585,11 @@ class PASM
 
     public function fxtract()   // get highest significand and exponent of number
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ah) || !is_numeric($this->stack[array_key_last($this->stack)]))
         {
             echo "\$ST0 & \$ah must be numeric for fxtract";
@@ -1356,8 +1626,11 @@ class PASM
 
     public function fyl2x()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ecx) || !is_numeric($this->ah))
             return $this;
         $this->rdx = $this->ecx * log($this->ah,2);
@@ -1369,8 +1642,11 @@ class PASM
 
     public function fyl2xp1()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ecx) || !is_numeric($this->ah))
             return $this;
         $this->rdx = $this->ecx * log($this->ah,2 + 1);
@@ -1404,8 +1680,11 @@ class PASM
 
     public function idiv()  // divide $ah / $ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ecx) || !is_numeric($this->ah))
             return $this;
         $this->rdx = $this->ah / $this->ecx;
@@ -1417,8 +1696,11 @@ class PASM
 
     public function imul()  // $ah * $ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ecx) || !is_numeric($this->ah))
             return $this;
         $this->rdx = $this->ah * $this->ecx;
@@ -1430,8 +1712,11 @@ class PASM
 
     public function in()    // $string is server, collects in $buffer
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $socket = stream_socket_server($this->string, $err, $err_str);
         if (!$socket) {
             echo "$this->err ($this->err_str)<br />\n";
@@ -1454,8 +1739,11 @@ class PASM
 
     public function inc()   // increment $ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_numeric($this->ecx))
             return $this;
         $this->ecx++;
@@ -1467,8 +1755,11 @@ class PASM
 
     public function in_b()  // read 1 byte at a time
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_string($this->string) || 0 == count($this->string))
         {
             echo "\$string must be numeric for in_b";
@@ -1496,8 +1787,11 @@ class PASM
 
     public function in_d() // read 1 dword at a time
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_string($this->string) || 0 == count($this->string))
         {
             echo "\$string must be numeric for in_d";
@@ -1525,8 +1819,11 @@ class PASM
 
     public function in_w()  // read word at a time
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_string($this->string) || 0 == count($this->string))
         {
             echo "\$string must be numeric for in_w";
@@ -1554,8 +1851,11 @@ class PASM
 
     public function in_q()  // read quad word at a time
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_string($this->string) || 0 == count($this->string))
         {
             echo "\$string must be numeric for in_q";
@@ -1597,8 +1897,11 @@ class PASM
 
     public function write() // write to file $string from $buffer
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!is_string($this->buffer) && !is_numeric($this->buffer))
             return;
     
@@ -1611,8 +1914,11 @@ class PASM
 
     public function read()     // read from file $this->string
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (!file_exists($this->string)) {
             echo "Missing file: $this->string";
             return;
@@ -1627,8 +1933,11 @@ class PASM
 
     public function mov_buffer()    // (really) move $buffer to stack
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         array_push($this->stack, $this->buffer);
         $this->buffer = "";
         if ($this->pdb == 1)
@@ -1639,8 +1948,11 @@ class PASM
 
     public function ja()    // from here down to next letter, is jmp commands (obvious to anyone)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah > $this->ecx) {
             $this->lop -= $this->ldp;
@@ -1663,8 +1975,11 @@ class PASM
 
     public function jae()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah >= $this->ecx) {
             $this->lop -= $this->ldp;
@@ -1687,8 +2002,11 @@ class PASM
 
     public function jb()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1711,8 +2029,11 @@ class PASM
 
     public function jbe()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->chain != null && $this->chain[$this->lop] == '' && $this->jbl == 1)
             $this->ecxl = 0;
         else
@@ -1738,8 +2059,11 @@ class PASM
 
     public function jc()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx == 1 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1762,8 +2086,11 @@ class PASM
 
     public function jcxz()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah == $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1786,8 +2113,11 @@ class PASM
 
     public function je()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah == $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1810,8 +2140,11 @@ class PASM
 
     public function jg()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah > $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1834,8 +2167,11 @@ class PASM
 
     public function jge()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah >= $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1858,8 +2194,11 @@ class PASM
 
     public function jl()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1882,8 +2221,11 @@ class PASM
 
     public function jle()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1926,8 +2268,11 @@ class PASM
 
     public function jnae()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1950,8 +2295,11 @@ class PASM
 
     public function jnb()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah >= $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1974,8 +2322,11 @@ class PASM
 
     public function jnbe()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah > $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -1998,8 +2349,11 @@ class PASM
 
     public function jnc()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx == 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2022,8 +2376,11 @@ class PASM
 
     public function jne()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah != $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2046,8 +2403,11 @@ class PASM
 
     public function jng()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ah < $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2070,8 +2430,11 @@ class PASM
 
     public function jnl()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx > $this->ecx && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2094,8 +2457,11 @@ class PASM
 
     public function jno()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx == 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2118,8 +2484,11 @@ class PASM
 
     public function jns()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx >= 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2142,8 +2511,11 @@ class PASM
 
     public function jnz()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx != 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2166,8 +2538,11 @@ class PASM
 
     public function jgz()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx > 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2190,8 +2565,11 @@ class PASM
 
     public function jlz()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx < 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2214,8 +2592,11 @@ class PASM
 
     public function jzge()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx >= 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2238,8 +2619,11 @@ class PASM
 
     public function jzle()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx <= 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2262,8 +2646,11 @@ class PASM
 
     public function jo()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx == 1 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2286,8 +2673,11 @@ class PASM
 
     public function jpe()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx%2 == 0 && $this->ah%2 && $this->ecx%2 == 0) {
             $this->lop -= $this->ldp;
@@ -2310,8 +2700,11 @@ class PASM
 
     public function jpo()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx%2 == 1 && $this->ah%2 == 1 && $this->ecx%2 == 1) {
             $this->lop -= $this->ldp;
@@ -2334,8 +2727,11 @@ class PASM
 
     public function jz()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         
         if ($this->ecx == 0 && $this->ah != null) {
             $this->lop -= $this->ldp;
@@ -2358,8 +2754,11 @@ class PASM
 
     public function load_all_flags()    // load all flags to $ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ah = ($this->OF) + ($this->CF * 2) + ($this->ZF * 4);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2375,8 +2774,11 @@ class PASM
 
     public function leave() // exit program
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         exit();
     }
 
@@ -2513,8 +2915,11 @@ class PASM
 
     public function loopnz()    // loop while ecx is not 0
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $counter = 0;
         if (!is_numeric($this->ah) || !is_numeric($this->ah))
             return $this;
@@ -2540,8 +2945,11 @@ class PASM
 
     public function loopz()     // loop while ecx == 0
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $counter = 0;
         if (!is_numeric($this->ah) || !is_numeric($this->ah))
             return $this;
@@ -2566,8 +2974,11 @@ class PASM
 
     public function mul()   // another ah * ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx *= $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2577,8 +2988,11 @@ class PASM
 
     public function movs()  // move $string to stack and clear
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         array_push($this->stack, $this->string);
         $this->string = "";
         if ($this->pdb == 1)
@@ -2588,8 +3002,11 @@ class PASM
     }
 
     public function reset_sp() {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         end($this->stack);
         $this->sp = current($this->stack);
         return $this;
@@ -2597,8 +3014,11 @@ class PASM
 
     public function movr()  // move $string to stack and clear
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         foreach ($this->array as $kv)
             $this->stack[count($this->stack)] = ($kv);
         $this->array = [];
@@ -2610,8 +3030,11 @@ class PASM
 
     public function addr(array $ar)  // move $string to stack and clear
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         array_push($this->array, $ar);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2632,8 +3055,11 @@ class PASM
 
     public function not()   // performs a not on $ah ad ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ecx != $this->ah)
             $this->cl = 1;
         if ($this->pdb == 1)
@@ -2644,8 +3070,11 @@ class PASM
 
     public function or()    // performs a or on ecx and ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ecx or $this->ah)
             $this->cl = 1;
             if ($this->pdb == 1)
@@ -2656,8 +3085,11 @@ class PASM
 
     public function out()   // moves buffer to site $string
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $socket = stream_socket_server($this->string, $err, $err_str);
         if (!$socket) {
             echo "$this->err ($this->err_str)<br />\n";
@@ -2684,8 +3116,11 @@ class PASM
 
     public function pop()   // pop stack
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         array_pop($this->stack);
         $this->ST0 = $this->stack[array_key_last($this->stack)];
         if ($this->pdb == 1)
@@ -2696,8 +3131,11 @@ class PASM
 
     public function push()  // push ecx to stack
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         array_push($this->stack, $this->ecx);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2707,8 +3145,11 @@ class PASM
 
     public function shift_left()    // shift ah left ecx times
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ah = decbin($this->ah);
         if (strlen($this->ah) == 1) {
             $this->OF = 1;
@@ -2731,8 +3172,11 @@ class PASM
 
     public function shift_right()   // shift ah right ecx times
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ah = decbin($this->ah);
         if (strlen($this->ah) == 1) {
             $this->OF = 1;
@@ -2758,8 +3202,11 @@ class PASM
 
     public function mv_shift_left() // pull bit around ecx times on ah (left)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ah = decbin($this->ah);
         if (strlen($this->ah) == 1) {
             $this->OF = 1;
@@ -2783,8 +3230,11 @@ class PASM
 
     public function mv_shift_right()    // same as above but (right)
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ah = decbin($this->ah);
         if (strlen($this->ah) == 1) {
             $this->OF = 1;
@@ -2838,8 +3288,11 @@ class PASM
 
     public function set_flags()     // set flags from ah bits [0,2]
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->OF = $this->ah%2;
         $this->ah >>= 1;
         $this->CF = $this->ah%2;
@@ -2854,8 +3307,11 @@ class PASM
 
     public function bitwisel()  // bitewise left
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx <<= $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2865,8 +3321,11 @@ class PASM
 
     public function bitewiser() // same right
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->ecx >>= $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2876,8 +3335,11 @@ class PASM
 
     public function scan_str()  // next(string);
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->strp = next($this->string);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2887,8 +3349,11 @@ class PASM
 
     public function reset_str()  // next(string);
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         reset($this->string);
         $this->strp = current($this->string);
         if ($this->pdb == 1)
@@ -2899,8 +3364,11 @@ class PASM
 
     public function set($key, $new_value)   // set $key with $new_value
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->$key = $new_value;
         }
@@ -2917,8 +3385,11 @@ class PASM
 
     public function set_ecx_adx()   // copy adx to ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ecx = $this->adx;
         }
@@ -2935,8 +3406,11 @@ class PASM
 
     public function set_ecx_rdx()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ecx = $this->rdx;
         }
@@ -2953,8 +3427,11 @@ class PASM
 
     public function set_ecx_bdx()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ecx = $this->bdx;
         }
@@ -2971,8 +3448,11 @@ class PASM
 
     public function set_ecx_cdx()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ecx = $this->cdx;
         }
@@ -2989,8 +3469,11 @@ class PASM
 
     public function set_ecx_ddx()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ecx = $this->ddx;
         }
@@ -3007,8 +3490,11 @@ class PASM
 
     public function set_ecx_edx()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ecx = $this->edx;
         }
@@ -3025,8 +3511,11 @@ class PASM
 
     public function set_ah_adx()   // copy adx to ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ah = $this->adx;
         }
@@ -3043,8 +3532,11 @@ class PASM
 
     public function set_ah_rdx()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ah = $this->rdx;
         }
@@ -3061,8 +3553,11 @@ class PASM
 
     public function set_ah_bdx()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ah = $this->bdx;
         }
@@ -3079,8 +3574,11 @@ class PASM
 
     public function set_ah_cdx()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ah = $this->cdx;
         }
@@ -3097,8 +3595,11 @@ class PASM
 
     public function set_ah_ddx()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ah = $this->ddx;
         }
@@ -3115,8 +3616,11 @@ class PASM
 
     public function set_ah_edx()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         try {
             $this->ah = $this->edx;
         }
@@ -3133,8 +3637,11 @@ class PASM
 
     public function seta()  // set if ah is above ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah > $this->ecx)
             $this->cl = 1;
         else
@@ -3148,8 +3655,11 @@ class PASM
 
     public function setae()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah >= $this->ecx)
             $this->cl = 1;
         else
@@ -3163,8 +3673,11 @@ class PASM
 
     public function setb()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah < $this->ecx)
             $this->cl = 1;
         else
@@ -3178,8 +3691,11 @@ class PASM
 
     public function setbe()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah <= $this->ecx)
             $this->cl = 1;
         else
@@ -3193,8 +3709,11 @@ class PASM
 
     public function setc()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->CF != 0)
             $this->cl = 1;
         else
@@ -3208,8 +3727,11 @@ class PASM
 
     public function sete()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah == $this->ecx)
             $this->cl = 1;
         else
@@ -3223,8 +3745,11 @@ class PASM
 
     public function setg()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah > $this->ecx)
             $this->cl = 1;
         else
@@ -3238,8 +3763,11 @@ class PASM
 
     public function setge()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah >= $this->ecx)
             $this->cl = 1;
         else
@@ -3253,8 +3781,11 @@ class PASM
 
     public function setl()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah < $this->ecx)
             $this->cl = 1;
         else
@@ -3268,8 +3799,11 @@ class PASM
 
     public function setle()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah <= $this->ecx)
             $this->cl = 1;
         else
@@ -3283,8 +3817,11 @@ class PASM
 
     public function setna()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah < $this->ecx)
             $this->cl = 1;
         else
@@ -3298,8 +3835,11 @@ class PASM
 
     public function setnae()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah > $this->ecx)
             $this->cl = 1;
         else
@@ -3313,8 +3853,11 @@ class PASM
 
     public function setnb()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah > $this->ecx)
             $this->cl = 1;
         else
@@ -3328,8 +3871,11 @@ class PASM
 
     public function setnbe()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah >= $this->ecx)
             $this->cl = 1;
         else
@@ -3343,8 +3889,11 @@ class PASM
 
     public function setnc()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->CF == 0)
             $this->cl = 1;
         else
@@ -3358,8 +3907,11 @@ class PASM
 
     public function setne()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah != $this->ecx)
             $this->cl = 1;
         else
@@ -3373,8 +3925,11 @@ class PASM
 
     public function setng()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah <= $this->ecx)
             $this->cl = 1;
         else
@@ -3388,8 +3943,11 @@ class PASM
 
     public function setnge()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah < $this->ecx)
             $this->cl = 1;
         else
@@ -3403,8 +3961,11 @@ class PASM
 
     public function setnl()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah >= $this->ecx)
             $this->cl = 1;
         else
@@ -3418,8 +3979,11 @@ class PASM
 
     public function setnle()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah > $this->ecx)
             $this->cl = 1;
         else
@@ -3433,8 +3997,11 @@ class PASM
 
     public function setno()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->OF != 1)
             $this->cl = 1;
         else
@@ -3448,8 +4015,11 @@ class PASM
 
     public function setnp()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (decbin($this->ah) != decbin($this->ecx))
             $this->cl = 1;
         else
@@ -3463,8 +4033,11 @@ class PASM
 
     public function setns()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah >= 0)
             $this->cl = 1;
         else
@@ -3478,8 +4051,11 @@ class PASM
 
     public function seto()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->OF == 1)
             $this->cl = 1;
         else
@@ -3493,8 +4069,11 @@ class PASM
 
     public function setp()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (decbin($this->ecx) != decbin($this->ah))
             $this->cl = 1;
         else
@@ -3508,8 +4087,11 @@ class PASM
 
     public function setpe()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (decbin($this->ecx) != decbin($this->ah) && $this->cl%2 == 0)
             $this->cl = 1;
         else
@@ -3523,8 +4105,11 @@ class PASM
 
     public function setpo()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if (decbin($this->ecx) != decbin($this->ah) && $this->cl%2 == 1)
             $this->cl = 1;
         else
@@ -3538,8 +4123,11 @@ class PASM
 
     public function sets()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah < 0)
             $this->cl = 1;
         else
@@ -3553,8 +4141,11 @@ class PASM
 
     public function setz()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah == 0)
             $this->cl = 1;
         else
@@ -3568,8 +4159,11 @@ class PASM
 
     public function stc()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->CF = 1;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3579,8 +4173,11 @@ class PASM
 
     public function add_to_buffer() // continue buffer string
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->buffer .= $this->string;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3599,8 +4196,11 @@ class PASM
 
     public function save_stack_file()   // save state of $stack to file $string
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         file_put_contents($this->string, serialize(($this->stack)));
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3610,8 +4210,11 @@ class PASM
 
     public function subtract_byte() // 
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->rdx = ($this->ecx - $this->ah)%256;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3621,8 +4224,11 @@ class PASM
 
     public function subtract_word()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->rdx = ($this->ecx - $this->ah)%pow(2,16);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3632,8 +4238,11 @@ class PASM
 
     public function subtract_double()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->rdx = ($this->ecx - $this->ah)%pow(2,32);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3643,8 +4252,11 @@ class PASM
 
     public function subtract_quad()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->rdx = ($this->ecx - $this->ah)%pow(2,8);
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3654,8 +4266,11 @@ class PASM
 
     public function load_cl()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $this->cl = $this->ah;
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -3665,8 +4280,11 @@ class PASM
 
     public function test_compare()
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah == $this->ecx)
             $this->cl = 0;
         else if ($this->ah > $this->ecx)
@@ -3685,8 +4303,11 @@ class PASM
 
     public function thread() // thread php pages on demand on linux
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $x = "?";
         foreach ($this->ST0 as $key => $value)
         {
@@ -3701,8 +4322,11 @@ class PASM
 
     public function xadd()  // ah = $ah + ecx && rdx = ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $temp = $this->ah;
         $this->rdx = $this->ah;
         $this->ah = $temp + $this->ecx;
@@ -3714,8 +4338,11 @@ class PASM
 
     public function exchange()  // reverse ecx and ah
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $temp = $this->ah;
         $this->ecx = $this->ah;
         $this->ah = $temp;
@@ -3727,8 +4354,11 @@ class PASM
 
     public function xor() // xor $ah and ecx
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         if ($this->ah xor $this->ecx)
             $this->rdx = 1;
             if ($this->pdb == 1)
@@ -3739,8 +4369,11 @@ class PASM
 
     public function popcnt()    // pop $ah times
     {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->chain, __METHOD__);  // Here we collect the current function name (all functions contain 1/2)
+        $argv = [];
+        for ($i = 0; $i < func_num_args() ; $i++)
+            array_push($argv,func_get_arg($i));
+        array_push($this->args, $argv);    // And if there are args we are putting them in $this->args
         $counter = count($this->stack);
         while (count($this->stack) > 0 && $this->ah < --$counter)
             array_pop($this->stack);
