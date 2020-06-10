@@ -1,6 +1,6 @@
 <?php
 
-class PASM //implements pASM_interface
+class PASM 
 {
 
     private $ZF = 0;    // Comparison Flag for Exchanges
@@ -10,6 +10,7 @@ class PASM //implements pASM_interface
     private $chain = array();   // Chain of events in line use $this->end() to stop and start again
     private $args = array();    // Array to hold args for set variables
     public $stack = array();    // Stack
+    public $array = array();    // array for stack formations
     public $sp;         // Stack pointer
     public $ST0;        // LAST STACK ELEMENT
     public $pdb = 0;    // debug flag (DEFAULT FALSE)
@@ -23,7 +24,7 @@ class PASM //implements pASM_interface
     // easy to see connection to low level speed
     public $tp;     // holder for current bit
     public $ecx;    // RHS, DECR, INC, COMPARATOR
-    public $adx;    // Register
+    public $adx;    // Registers
     public $bdx;    //
     public $cdx;    //
     public $ddx;    //
@@ -80,44 +81,6 @@ class PASM //implements pASM_interface
                 $this->$method();
             }
         }
-    }
-
-    public function print_var($var)  // mov ecx to $string
-    {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-        echo $this->$var . " ";
-        if ($this->pdb == 1)
-            echo $this->lop . " ";
-        $this->lop++;
-        return $this;
-    }
-
-    public function addr(array $var)  // mov ecx to $string
-    {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-        echo $this->array = $var;
-        if ($this->pdb == 1)
-            echo $this->lop . " ";
-        $this->lop++;
-        return $this;
-    }
-
-    public function movr()  // mov ecx to $string
-    {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-       
-        foreach ($this->array as $key => $val)
-        {
-            $this->stack[$key] = $val;
-        }
-        $this->ST0 = $this->stack[array_key_last($this->stack)];
-        if ($this->pdb == 1)
-            echo $this->lop . " ";
-        $this->lop++;
-        return $this;
     }
 
     // All functions are 100% ASM derived
@@ -792,13 +755,34 @@ class PASM //implements pASM_interface
         return $this;
     }
 
+    public function recvr_stack(string $filename) {
+        if (!file_exists($filename))
+            return false;
+        $this->stack = (unserialize(file_get_contents($filename)));
+        return $this;
+    }
+
     public function stack_load() // stack with count on stack
     {
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
         $key = "f" . count($this->stack);
         array_push($this->stack, array($key => $this->ecx));
-        
+        $this->ecx = null;
+        $this->ST0 = $this->stack[array_key_last($this->stack)];
+        if ($this->pdb == 1)
+            echo $this->lop . " ";
+        $this->lop++;
+        return $this;
+    }
+    
+    public function stack_mrg() // stack with count on stack
+    {
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
+        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        $key = "f" . count($this->stack);
+        array_merge($this->stack, $this->array);
+        $this->ecx = null;
         $this->ST0 = $this->stack[array_key_last($this->stack)];
         if ($this->pdb == 1)
             echo $this->lop . " ";
@@ -2415,11 +2399,11 @@ class PASM //implements pASM_interface
         return $this;
     }
 
-    public function load_str()  // mov ecx to $string
+    public function load_str($str = "")  // mov ecx to $string
     {
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-        $this->string = $this->ecx;
+        $this->string = empty($str) ? $this->ecx : $str;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -2433,9 +2417,9 @@ class PASM //implements pASM_interface
         while ($this->lop + $counted < $count) {
             $func = $this->chain[$this->lop + $counted];
             if ($func == 'set')
-                PAS::$func($this->args[$this->lop + $counted][0],$this->args[$this->lop + $counted][1]);
+                $this->$func($this->args[$this->lop + $counted][0],$this->args[$this->lop + $counted][1]);
             else
-                PAS::$func();
+                $this->$func();
             $counted++;
         }
         $this->ldp = 0;
@@ -2594,6 +2578,38 @@ class PASM //implements pASM_interface
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
         array_push($this->stack, $this->string);
         $this->string = "";
+        if ($this->pdb == 1)
+            echo $this->lop . " ";
+        $this->lop++;
+        return $this;
+    }
+
+    public function reset_sp() {
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
+        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        end($this->stack);
+        $this->sp = current($this->stack);
+        return $this;
+    }
+
+    public function movr()  // move $string to stack and clear
+    {
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
+        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        foreach ($this->array as $kv)
+            $this->stack[count($this->stack)] = ($kv);
+        $this->array = [];
+        if ($this->pdb == 1)
+            echo $this->lop . " ";
+        $this->lop++;
+        return $this;
+    }
+
+    public function addr(array $ar)  // move $string to stack and clear
+    {
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
+        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        array_push($this->array, $ar);
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3582,7 +3598,7 @@ class PASM //implements pASM_interface
     {
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-        file_put_contents($this->string, serialize($this->stack));
+        file_put_contents($this->string, serialize(($this->stack)));
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
@@ -3744,17 +3760,6 @@ class PASM //implements pASM_interface
     public function stack_func_pos() {  // sync stack pointer
         $this->sp = current($this->stack);
         $this->sp();
-        if ($this->pdb == 1)
-            echo $this->lop . " ";
-        $this->lop++;
-        return $this;
-    }
-    
-    public function create_register(string $register, $value)
-    {
-        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['function']);
-        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
-        $this->$register = $value;
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;

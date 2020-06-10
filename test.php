@@ -10,37 +10,40 @@
     
     if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('adduser'))// && count($route->QURY) >= 5)
     {
-        if (!isset(($_SERVER['PHP_SELF'])))
-            $_SERVER['PHP_SELF'] = "index.php";
+        if (!isset(($_SERVER['Referer'])))
+            $_SERVER['Referer'] = "index.php";
         @$route->addUserToContract();
         @$route->route();
     }
     else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('remuser'))// && count($route->QURY) >= 5)
     {
-        if (!isset(($_SERVER['PHP_SELF'])))
-            $_SERVER['PHP_SELF'] = "index.php";
+        if (!isset(($_SERVER['Referer'])))
+            $_SERVER['Referer'] = "index.php";
         @$route->remUserFromContract();
         @$route->route();
     }
     if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('add'))// && count($route->QURY) >= 5)
     {
-        if (!isset(($_SERVER['PHP_SELF'])))
-            $_SERVER['PHP_SELF'] = "index.php";
+        if (!isset(($_SERVER['Referer'])))
+            $_SERVER['Referer'] = "index.php";
         @$route->addContract();
         @$route->route();
     }
     else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('remove'))// && count($route->QURY) >= 5)
     {
-        if (!isset(($_SERVER['PHP_SELF'])))
-            $_SERVER['PHP_SELF'] = "index.php";
+        if (!isset(($_SERVER['Referer'])))
+            $_SERVER['Referer'] = "index.php";
         @$route->remContract();
         @$route->route();
     }
-    else
+    else if (count($route->QURY) >= 4)
     {
-        if (!isset(($_SERVER['PHP_SELF'])))
-            $_SERVER['PHP_SELF'] = "index.php";
+        if (!isset(($_SERVER['Referer'])))
+            $_SERVER['Referer'] = "index.php";
         @$route->route();
+    }
+    else if (count($route->QURY) < 5) {
+        echo "Not Enough Arguments\rRecv, From, Target, Port, User";
     }
     $route->pasm->load_str($_COOKIE['PHPSESSID']); 
     $route->save($_COOKIE['PHPSESSID']);
