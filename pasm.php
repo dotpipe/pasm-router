@@ -1,6 +1,6 @@
 <?php
 
-class PASM
+class PASM //implements pASM_interface
 {
 
     private $ZF = 0;    // Comparison Flag for Exchanges
@@ -87,6 +87,33 @@ class PASM
         array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
         array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
         echo $this->$var . " ";
+        if ($this->pdb == 1)
+            echo $this->lop . " ";
+        $this->lop++;
+        return $this;
+    }
+
+    public function addr(array $var)  // mov ecx to $string
+    {
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
+        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        echo $this->array = $var;
+        if ($this->pdb == 1)
+            echo $this->lop . " ";
+        $this->lop++;
+        return $this;
+    }
+
+    public function movr()  // mov ecx to $string
+    {
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
+        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+       
+        foreach ($this->array as $key => $val)
+        {
+            $this->stack[$key] = $val;
+        }
+        $this->ST0 = $this->stack[array_key_last($this->stack)];
         if ($this->pdb == 1)
             echo $this->lop . " ";
         $this->lop++;
