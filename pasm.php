@@ -83,6 +83,47 @@ class PASM
         }
     }
 
+<<<<<<< HEAD
+=======
+    public function print_var($var)  // mov ecx to $string
+    {
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
+        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        echo $this->$var . " ";
+        if ($this->pdb == 1)
+            echo $this->lop . " ";
+        $this->lop++;
+        return $this;
+    }
+
+    public function addr(array $var)  // mov ecx to $string
+    {
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
+        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+        echo $this->array = $var;
+        if ($this->pdb == 1)
+            echo $this->lop . " ";
+        $this->lop++;
+        return $this;
+    }
+
+    public function movr()  // mov ecx to $string
+    {
+        array_push($this->chain, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['function']);
+        array_push($this->args, debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT)[0]['args']);
+       
+        foreach ($this->array as $key => $val)
+        {
+            $this->stack[$key] = $val;
+        }
+        $this->ST0 = $this->stack[array_key_last($this->stack)];
+        if ($this->pdb == 1)
+            echo $this->lop . " ";
+        $this->lop++;
+        return $this;
+    }
+
+>>>>>>> 240e72387782720e2325ef9346b874b0b2161295
     // All functions are 100% ASM derived
     // Together there are 225+ functions
     // Do to obvious nature of names and
