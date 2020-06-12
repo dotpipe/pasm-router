@@ -46,8 +46,8 @@ include ("load.php");
 		public function addContract() {
 			if ($this->group_id > 0)
 				return false;
-			if (count($this->pasm->stack) == 0 && file_exists($_COOKIE['PHPSESSID']))
-				$this->load($_COOKIE['PHPSESSID']);
+			if (count($this->pasm->stack) == 0 && file_exists("routing.ini"))
+				$this->load("routing.ini");
 			
 			$sp = $this->getContract();
 			
@@ -59,12 +59,11 @@ include ("load.php");
 			else {
 
 				$this->pasm->addr([
-					"recv" => $this->QURY['recv'],
+					"recv" => $this->QURY['recv'], 
 					"token" => $this->QURY['token'],
 					"allowed" => 1,
-					"redirect" => [$this->reqh['Referer'], $this->QURY['base_dir'] . "/" . $this->QURY['target']], 
-					"port" => $this->QURY['port'],
-					"user" => $this->QURY['user']
+					"redirect" => [basename($_SERVER['SCRIPT_NAME']), $this->QURY['base_dir'] . '/' . $this->QURY['target']], 
+					"port" => $this->QURY['port']
 					])
 					->movr()
 					->end();
@@ -82,8 +81,8 @@ include ("load.php");
 		public function addUserToContract() {
 			if ($this->group_id > 0)
 				return false;
-			if (count($this->pasm->stack) == 0 && file_exists($_COOKIE['PHPSESSID']))
-				$this->load($_COOKIE['PHPSESSID']);
+			if (count($this->pasm->stack) == 0 && file_exists("routing.ini"))
+				$this->load("routing.ini");
 			
 			$sp = $this->getContract();
 			
@@ -98,7 +97,44 @@ include ("load.php");
 					"recv" => $this->QURY['recv'], 
 					"token" => $this->QURY['token'],
 					"allowed" => 1,
-					"redirect" => [basename($_SERVER['Referer']), $this->QURY['base_dir'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+					"redirect" => [basename($_SERVER['SCRIPT_NAME']), $this->QURY['base_dir'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+					"port" => $this->QURY['port'],
+					"user" => $this->QURY['user']
+					])
+					->movr()
+					->end();
+			}
+			
+			return $this;
+		}
+		
+		/*
+		*
+		* public function addUserToContract
+		* @parameters recv, token, target, port, user
+		*
+		*/
+		public function addGroupToContract() {
+			if ($this->group_id > 0)
+				return false;
+			if (count($this->pasm->stack) == 0 && file_exists("routing.ini"))
+				$this->load("routing.ini");
+			
+			$sp = $this->getContract();
+			
+			if ($sp != -1) {
+				$p = array_search($sp, $this->pasm->stack);
+				$sp['allowed'] = 1;
+				$this->pasm->stack[$p] = $sp;
+			}
+			else {
+
+				$this->pasm->addr([
+					"recv" => $this->QURY['recv'], 
+					"token" => $this->QURY['token'],
+					"group" => $this->QURY['group'],
+					"allowed" => 1,
+					"redirect" => [basename($_SERVER['SCRIPT_NAME']), $this->QURY['base_dir'] . '/' . $this->QURY['group'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
 					"port" => $this->QURY['port'],
 					"user" => $this->QURY['user']
 					])
@@ -128,9 +164,41 @@ include ("load.php");
 			else {
 				$this->pasm->addr([
 					"recv" => $this->QURY['recv'],
+					"token" => $this->QURY['token'],
+					"group" => $this->QURY['group'], 
+					"allowed" => 0,
+					"redirect" => [basename($_SERVER['SCRIPT_NAME']), $this->QURY['base_dir'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']],
+					"port" => $this->QURY['port'], 
+					"user" => $this->QURY['user']
+					])
+					->movr()
+					->end();
+			}
+			return $this;
+		}
+		
+		/*
+		*
+		* public function remContract
+		* @parameters none
+		*
+		*/
+		public function remUserFromContract() {
+			if ($this->group_id > 0)
+				return false;
+			
+			$sp = $this->getContract();
+			if ($sp != -1) {
+				$p = array_search($sp, $this->pasm->stack);
+				$sp['allowed'] = 0;
+				$this->pasm->stack[$p] = $sp;
+			}
+			else {
+				$this->pasm->addr([
+					"recv" => $this->QURY['recv'],
 					"token" => $this->QURY['token'], 
 					"allowed" => 0,
-					"redirect" => [$this->reqh['Referer'], $this->QURY['base_dir'] . '/' . $this->QURY['target']], 
+					"redirect" => [basename($this->reqh['SCRIPT_NAME']), $this->QURY['base_dir'] . '/' . $this->QURY['target']], 
 					"port" => $this->QURY['port'], 
 					"user" => $this->QURY['user']
 					])
@@ -151,7 +219,15 @@ include ("load.php");
 				"recv" => $this->QURY['recv'], 
 				"token" => $this->QURY['token'],
 				"allowed" => 1,
-				"redirect" => [basename($_SERVER['Referer']), $this->QURY['base_dir'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+				"redirect" => [basename($_SERVER['SCRIPT_NAME']), $this->QURY['base_dir'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
+				"port" => $this->QURY['port']
+			];
+			$group = [
+				"recv" => $this->QURY['recv'], 
+				"token" => $this->QURY['token'],
+				"group" => $this->QURY['group'],
+				"allowed" => 1,
+				"redirect" => [basename($_SERVER['SCRIPT_NAME']), $this->QURY['base_dir'] . '/' . $this->QURY['group'] . '/' . $this->QURY['user'] . '/' . $this->QURY['sub'] . '/' . $this->QURY['target']], 
 				"port" => $this->QURY['port'],
 				"user" => $this->QURY['user']
 			];
@@ -159,24 +235,30 @@ include ("load.php");
 				"recv" => $this->QURY['recv'], 
 				"token" => $this->QURY['token'], 
 				"allowed" => 1, 
-				"redirect" => [basename($_SERVER['Referer']), $this->QURY['base_dir'] . '/' . $this->QURY['target']], 
+				"redirect" => [basename($_SERVER['SCRIPT_NAME']), $this->QURY['base_dir'] . '/' . $this->QURY['target']], 
 				"port" => $this->QURY['port'], 
 				"user" => $this->QURY['user']
 				
 			];
 			foreach ($this->pasm->stack as $key) {
-				if (($redirect) == ($key) || ($user) == ($key))
+				if (($redirect) == ($key) || ($user) == ($key) || ($group) == ($key))
 				{
+					if ($group == $key)
+						return $group;
 					return $redirect == $key ? $redirect : $user;
 				}
 				$redirect['allowed'] = 0;
 				$user['allowed'] = 0;
-				if (($redirect) == ($key) || ($user) == ($key))
+				$group['allowed'] = 0;
+				if (($redirect) == ($key) || ($user) == ($key) || ($group) == ($key))
 				{
+					if ($group == $key)
+						return $group;
 					return $redirect == $key ? $redirect : $user;
 				}
 				$redirect['allowed'] = 1;
 				$user['allowed'] = 1;
+				$group['allowed'] = 1;
 			}
 			return -1;
 		}
@@ -210,27 +292,24 @@ include ("load.php");
 				if ($sp['allowed'] == 0)
 					header("Location: index.php");
 				$field = []; 
+				$port = $sp['port'];
 				$protocol = getservbyport($sp['port'],'tcp');
 				$aim = $sp['redirect'][1];
 				$domain = $sp['recv'];
 				
 				# Create a connection
-				$url = "http://{$domain}/{$aim}";
+				$url = "http://{$domain}:{$port}/{$aim}";
 				if (1) {
-					$handle = curl_init(); 
+					$handle = curl_init($url); 
 					$this->reqHeaders();  
 					$user_agent=$_SERVER['HTTP_USER_AGENT'];
 					curl_setopt($handle, CURLOPT_HTTPHEADER, $this->reqh);
 					//curl_setopt($handle, CURLOPT_HEADER, true);
-					//curl_setopt($handle, CURLOPT_TIMEOUT, 20);
-					curl_setopt($handle, CURLOPT_URL, $url);
-					curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+					//curl_setopt($handle, CURLOPT_URL, $url);
+					//curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 					curl_setopt($handle, CURLOPT_POST, true);
-					curl_setopt($handle, CURLOPT_FOLLOWLOCATION,true);
+					//curl_setopt($handle, CURLOPT_FOLLOWLOCATION,true);
 					curl_setopt($handle, CURLOPT_POSTFIELDS, http_build_query($this->QURY));
-					curl_setopt($handle, CURLOPT_BINARYTRANSFER, true);
-					//curl_setopt($handle, CURLOPT_ENCODING, "");
-					//curl_setopt($handle, CURLOPT_USERAGENT, $user_agent);
 					$page_contents = curl_exec($handle);
 					echo $page_contents;
 				}
@@ -240,12 +319,12 @@ include ("load.php");
 						$data .= "&{$key}={$value}";
 					}
 					$data = substr($data,1);
-					header("Location: http://{$domain}/{$url}?{$data}");
+					header("Location: http://{$domain}:{$port}/{$url}?{$data}");
 				}
 			}
 			else {
 				$this->reqHeaders();
-				$q = $this->reqh['Referer'];
+				$q = $this->reqh['SCRIPT_NAME'];
 				echo var_dump($this->reqh);
 				
 			}
@@ -282,8 +361,8 @@ include ("load.php");
 		public function save(string $filename = "") {
 			
 			if ($filename == "")
-				$filename = $_COOKIE['PHPSESSID'];
-			if (count($this->pasm->stack) == 0 && file_exists($_COOKIE['PHPSESSID']))
+				$filename = "routing.ini";
+			if (count($this->pasm->stack) == 0 && file_exists("routing.ini"))
 				$this->pasm->recvr_stack($filename);
 
 			//$this->pasm->stack;
@@ -303,7 +382,7 @@ include ("load.php");
 		public function load(string $filename= "") {
 			$this->pasm->stack = [];
 			if ($filename == "")
-				$filename = $_COOKIE['PHPSESSID'];
+				$filename = "routing.ini";
 			if (!file_exists($filename))
 				return false;
 			$this->pasm->recvr_stack($filename)

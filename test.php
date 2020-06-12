@@ -4,48 +4,36 @@
     include("routes.php");
 
     $route = new Routes();
-    if (file_exists($_COOKIE['PHPSESSID']))
-        $route->load($_COOKIE['PHPSESSID']);
+    if (file_exists("routing.ini"))
+        $route->load("routing.ini");
     
     
-    if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('adduser'))// && count($route->QURY) >= 5)
+    if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('addgroup'))
     {
-        if (!isset(($_SERVER['Referer'])))
-            $_SERVER['Referer'] = "index.php";
+        @$route->addGroupToContract();
+        @$route->route();
+    }
+    else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('adduser'))
+    {
         @$route->addUserToContract();
         @$route->route();
     }
-    else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('remuser'))// && count($route->QURY) >= 5)
+    else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('remuser'))
     {
-        if (!isset(($_SERVER['Referer'])))
-            $_SERVER['Referer'] = "index.php";
         @$route->remUserFromContract();
         @$route->route();
     }
-    if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('add'))// && count($route->QURY) >= 5)
+    else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('add'))
     {
-        if (!isset(($_SERVER['Referer'])))
-            $_SERVER['Referer'] = "index.php";
         @$route->addContract();
         @$route->route();
     }
-    else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('remove'))// && count($route->QURY) >= 5)
+    else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('remove'))
     {
-        if (!isset(($_SERVER['Referer'])))
-            $_SERVER['Referer'] = "index.php";
         @$route->remContract();
         @$route->route();
     }
-    else if (count($route->QURY) >= 4)
-    {
-        if (!isset(($_SERVER['Referer'])))
-            $_SERVER['Referer'] = "index.php";
-        @$route->route();
-    }
-    else if (count($route->QURY) < 5) {
-        echo "Not Enough Arguments\rRecv, From, Target, Port, User";
-    }
-    $route->pasm->load_str($_COOKIE['PHPSESSID']); 
-    $route->save($_COOKIE['PHPSESSID']);
+    $route->pasm->load_str("routing.ini"); 
+    $route->save("routing.ini");
 
 ?>
