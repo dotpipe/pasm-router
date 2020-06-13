@@ -38,8 +38,7 @@ include ("load.php");
 			if (isset($_SESSION['user']))
 				$this->QURY['user'] = $_SESSION['user'];
 			if (file_exists("routing.ini")) {
-				$routes = unserialize(file_get_contents("routing.ini"));
-				echo var_dump($routes);
+				$routes = unserialize(file_get_contents("routing.ini")); 
 				$this->pasm->addr($routes)->movr()->end();
 				$this->pasm->stack = array_unique($this->pasm->stack);
 			}
