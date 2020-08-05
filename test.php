@@ -1,22 +1,17 @@
 <?php
     if (!isset($_SESSION))
         session_start();
-    include("routes.php");
-
+    
+    include_once('userclass.php');
+    include_once('pasm.php');
+    include_once('routes.php');
+    include_once('crud.php');
+    
     $route = new Routes();
+ 
     
     if (!isset($route->QURY['req']))
     {
-        @$route->route();
-    }
-    else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('addgroup'))
-    {
-        @$route->addGroupToContract();
-        @$route->route();
-    }
-    else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('remgroup'))
-    {
-        @$route->remGroupFromContract();
         @$route->route();
     }
     else if (isset($route->QURY['req']) && strtolower($route->QURY['req']) == strtolower('add'))
@@ -39,7 +34,8 @@
         @$route->remUserFromContract();
         @$route->route();
     }
-    $route->pasm->load_str("routing.ini"); 
+    
+    $route->pasm->load_str("routing.ini");
     $route->save("routing.ini");
 
 ?>
