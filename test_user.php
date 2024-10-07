@@ -59,5 +59,5 @@ function removeUser($route) {
 addUser($route);
 
 // Remove the user
-removeUser($route);
+// removeUser($route);
 ?>
