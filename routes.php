@@ -32,8 +32,8 @@
 				if (!isset($this->QURY) || $this->QURY['user'] == null)
 					$this->QURY['user'] = "guest";
 			}
-			$this->reqHeaders();
-			$this->resHeaders();
+			// $this->reqHeaders();
+			// $this->resHeaders();
 
 		}
 		
